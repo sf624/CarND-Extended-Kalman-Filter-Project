@@ -1,4 +1,8 @@
+#if defined(_WIN32)
+#include "uWebSockets-0.13.0/src/uWS.h"
+#else
 #include <uWS/uWS.h>
+#endif
 #include <iostream>
 #include "json.hpp"
 #include <math.h>
@@ -108,7 +112,7 @@ int main()
           //Call ProcessMeasurment(meas_package) for Kalman filter
     	  fusionEKF.ProcessMeasurement(meas_package);    	  
 
-    	  //Push the current estimated x,y positon from the Kalman filter's state vector
+    	  //Push the current estimated x,y positon from the Klaman filter's state vector
 
     	  VectorXd estimate(4);
 
@@ -172,7 +176,11 @@ int main()
   });
 
   int port = 4567;
+#if defined(_WIN32)
+  if (h.listen("0.0.0.0", port))
+#else
   if (h.listen(port))
+#endif
   {
     std::cout << "Listening to port " << port << std::endl;
   }
@@ -183,90 +191,3 @@ int main()
   }
   h.run();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
